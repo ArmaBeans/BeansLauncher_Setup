@@ -4,7 +4,7 @@
 
 
 #define APP_NAME "BeansLauncher"
-#define APP_VERSION "1.27"
+#define APP_VERSION "0.1.33"
 #define APP_PUBLISHER "FiftyOne"
 #define APP_URL "http://fiftyone.info"
 #define APP_MAINEXEC "BeansLauncher.exe"
@@ -29,13 +29,15 @@ AppUpdatesURL={#APP_URL}
 DefaultDirName={pf}\{#APP_NAME}
 DisableDirPage=yes
 DefaultGroupName={#APP_NAME}
-OutputBaseFilename=ArmaBeans_UNSTABLE
+OutputBaseFilename=__TEST_ArmaBeans_Setup_v{#APP_VERSION}
 Compression=lzma
 SolidCompression=yes
 
 #include <idp.iss>
 DisableReadyPage=True
 DisableReadyMemo=True
+UninstallDisplayIcon={app}\logo.ico
+SetupIconFile=logo.ico
 
 [Languages]
 Name: "english"; MessagesFile: "compiler:Default.isl"
@@ -57,6 +59,12 @@ Name: "{userappdata}\Microsoft\Internet Explorer\Quick Launch\{#APP_NAME}"; File
 ; Uncomment one of following lines, if you haven't checked "Add IDP include path to ISPPBuiltins.iss" option during IDP installation:
 ;#pragma include __INCLUDE__ + ";" + ReadReg(HKLM, "Software\Mitrich Software\Inno Download Plugin", "InstallDir")
 ;#pragma include __INCLUDE__ + ";" + "c:\lib\InnoDownloadPlugin"
+
+[UninstallDelete]
+Type: filesandordirs; Name: "{app}"
+
+[Files]
+Source: "logo.ico"; DestDir: "{app}"; Flags: ignoreversion
 
 [Code]
 procedure InitializeWizard();
